@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -109,7 +109,7 @@ static class Native
         catch (Exception) { }
         if (title.Length == 0) return app.Length > 0 ? app : "Untitled window";
         if (app.Length == 0 || title.IndexOf(app, StringComparison.OrdinalIgnoreCase) >= 0) return title;
-        return app + " â€” " + title;
+        return app + " - " + title;
     }
 }
 
@@ -477,9 +477,9 @@ sealed class Controller
         bool win = m == ClickMode.Window;
         anyKey.IsEnabled = !win;
         anyKey.Opacity = win ? 0.45 : 1;
-        anyKeyNote.Text = win ? "Off in window mode â€” typing goes to other apps" : "Off = only the stop hotkey stops it";
+        anyKeyNote.Text = win ? "Off in window mode - typing goes to other apps" : "Off = only the stop hotkey stops it";
         footerNote.Text = win ? "Your mouse and keyboard stay free while it clicks in the background."
-                              : "Moving the mouse never interrupts it â€” only your keyboard does.";
+                              : "Moving the mouse never interrupts it - only your keyboard does.";
         UpdateWindowLabel();
     }
 
@@ -528,7 +528,7 @@ sealed class Controller
     {
         if (r == null) return;
         countText.Text = Interlocked.Read(ref r.Count).ToString("N0");
-        subText.Text = "clicks  Â·  " + Elapsed(r);
+        subText.Text = "clicks  ·  " + Elapsed(r);
     }
 
     // ---------- start / stop ----------
@@ -547,7 +547,7 @@ sealed class Controller
         r.Mode = CurrentMode();
         if (r.Mode == ClickMode.Fixed && (!int.TryParse(xBox.Text.Trim(), out r.X) || !int.TryParse(yBox.Text.Trim(), out r.Y)))
         {
-            ShowToast("warn", "No target location", "Use â€œPick on screenâ€ to choose where to click");
+            ShowToast("warn", "No target location", "Use “Pick on screen” to choose where to click");
             return;
         }
         if (r.Mode == ClickMode.Window)
@@ -555,12 +555,12 @@ sealed class Controller
             UpdateWindowLabel();
             if (targetWin == IntPtr.Zero)
             {
-                ShowToast("warn", "No window picked", "Use â€œPick on screenâ€ to choose a spot inside a window");
+                ShowToast("warn", "No window picked", "Use “Pick on screen” to choose a spot inside a window");
                 return;
             }
             if (Native.IsIconic(targetWin))
             {
-                ShowToast("warn", "Window is minimized", "Restore the target window first â€” it may sit behind others");
+                ShowToast("warn", "Window is minimized", "Restore the target window first - it may sit behind others");
                 return;
             }
             r.Root = targetWin; r.X = targetX; r.Y = targetY;
@@ -669,7 +669,7 @@ sealed class Controller
         if (recording != null) EndRecording(null);
         recording = b;
         b.Tag = "rec";
-        b.Content = "Press a keyâ€¦";
+        b.Content = "Press a key…";
     }
 
     void EndRecording(Hotkey hk)
@@ -696,7 +696,7 @@ sealed class Controller
         var winLine = new TextBlock { FontSize = 12, Foreground = Frozen(0xB9, 0xA8, 0xFF), FontWeight = FontWeights.SemiBold,
                                       MaxWidth = 360, TextTrimming = TextTrimming.CharacterEllipsis, Margin = new Thickness(0, 3, 0, 0),
                                       Visibility = pickWindow ? Visibility.Visible : Visibility.Collapsed };
-        var hint = new TextBlock { Text = pickWindow ? "Click a spot inside the window to target  Â·  Esc to cancel" : "Click to set target  Â·  Esc to cancel",
+        var hint = new TextBlock { Text = pickWindow ? "Click a spot inside the window to target  ·  Esc to cancel" : "Click to set target  ·  Esc to cancel",
                                    FontSize = 11.5, Foreground = Muted, Margin = new Thickness(0, 2, 0, 0) };
         var sp = new StackPanel();
         sp.Children.Add(coord);

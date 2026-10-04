@@ -377,7 +377,7 @@
           </Border>
         </StackPanel>
 
-        <TextBlock x:Name="FooterNote" Text="Moving the mouse never interrupts it &#x2014; only your keyboard does."
+        <TextBlock x:Name="FooterNote" Text="Moving the mouse never interrupts it -only your keyboard does."
                    Foreground="#6F7690" FontSize="11.5" HorizontalAlignment="Center" Margin="0,12,0,0"/>
       </StackPanel>
     </Border>
